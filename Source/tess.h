@@ -81,6 +81,10 @@ struct TESStesselator {
 	TESSindex *elements;
 	int elementCount;
 
+	/*** custom callback for combining vertices */
+	TESScombine combineCallback;
+	void*		combineCallbackData;
+
 	TESSalloc alloc;
 
 	jmp_buf env;			/* place to jump to when memAllocs fail */

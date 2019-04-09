@@ -438,12 +438,17 @@ static void GetIntersectData( TESStesselator *tess, TESSvertex *isect,
  */
 {
 	TESSreal weights[4];
-	TESS_NOTUSED( tess );
 
 	isect->coords[0] = isect->coords[1] = isect->coords[2] = 0;
 	isect->idx = TESS_UNDEF;
 	VertexWeights( isect, orgUp, dstUp, &weights[0] );
 	VertexWeights( isect, orgLo, dstLo, &weights[2] );
+
+	if(tess->combineCallback != 0)
+	{
+		const TESSindex indices[4] = { orgUp->idx, dstUp->idx, orgLo->idx, dstLo->idx };
+		isect->idx = (*tess->combineCallback)(isect->coords, indices, weights, tess->combineCallbackData);
+	}
 }
 
 static int CheckForRightSplice( TESStesselator *tess, ActiveRegion *regUp )

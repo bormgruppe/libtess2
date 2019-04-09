@@ -205,6 +205,22 @@ void tessAddContour( TESStesselator *tess, int size, const void* pointer, int st
 //  value - 1 if enabled, 0 if disabled.
 void tessSetOption( TESStesselator *tess, int option, int value );
 
+// custom callback for combining vertices
+// TESSindex combine(const TESSreal* coord, const TESSindex* vertexIndices, const TESSreal* weights, void* userData);
+// Parameters:
+//		coord			the calculated intersection (2 or 3 coordinates depending on the tessellator usage)
+//		vertexIndices	indices of original vertices which are combined
+//		weights			weights for combining the vertices
+//		userData		pointer provided to a tessSetCombineCallback call when setting a callback
+// Returns:
+//		new vertex index
+typedef TESSindex (*TESScombine)(const TESSreal*, const TESSindex*, const TESSreal*, void*);
+
+// tessSetCombineCallback() - Set new callback for combining vertices
+// Parameters:
+//  combineCallback - new callback (if 0, then it is not used)
+void tessSetCombineCallback( TESStesselator *tess, TESScombine combineCallback, void* combineCallbackData);
+
 // tessTesselate() - tesselate contours.
 // Parameters:
 //   tess - pointer to tesselator object.

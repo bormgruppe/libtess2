@@ -653,6 +653,9 @@ TESStesselator* tessNewTess( TESSalloc* alloc )
 	tess->elements = 0;
 	tess->elementCount = 0;
 
+	tess->combineCallback = 0;
+	tess->combineCallbackData = 0;
+
 	return tess;
 }
 
@@ -994,6 +997,11 @@ void tessSetOption( TESStesselator *tess, int option, int value )
 	}
 }
 
+void tessSetCombineCallback( TESStesselator *tess, TESScombine combineCallback, void* combineCallbackData)
+{
+	tess->combineCallback = combineCallback;
+	tess->combineCallbackData = combineCallbackData;
+}
 
 int tessTesselate( TESStesselator *tess, int windingRule, int elementType,
 				  int polySize, int vertexSize, const TESSreal* normal )
