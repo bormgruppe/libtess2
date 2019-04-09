@@ -23,6 +23,11 @@ Thumbs.db
 
 ## Build dir
 Build/*
+win32/vs2017/bin/*
+win32/vs2017/objs/*
+
+## Visual Studio directories
+.vs
 
 ## xcode specific
 *xcuserdata*
