@@ -199,6 +199,18 @@ void tessDeleteTess( TESStesselator *tess );
 //   count - number of vertices in contour.
 void tessAddContour( TESStesselator *tess, int size, const void* pointer, int stride, int count );
 
+// define a contour by manually feeding vertices between calls tessBeginContour and tessEndContour
+//
+// tessBeginContour(tess)
+// for(int k = 0; k < numVertices; ++k)
+//     tessAddVertex(tess, 3, coords[k], k);
+// tessEndContour(tess)
+//
+// This allows defining a contour also if vertices are not stored in consecutive memory and also allows the called to set vertex indices
+void tessBeginContour( TESStesselator *tess );
+void tessAddVertex( TESStesselator *tess, int size, const void* pointer, int index);
+void tessEndContour( TESStesselator *tess );
+
 // tessSetOption() - Toggles optional tessellation parameters
 // Parameters:
 //  option - one of TessOption

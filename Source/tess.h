@@ -74,6 +74,7 @@ struct TESStesselator {
 	struct BucketAlloc* regionPool;
 
 	TESSindex vertexIndexCounter;
+	TESShalfEdge *currentContourHalfEdge;	/* valid only between tessBeginContour and tessEndContour calls */
 
 	TESSreal *vertices;
 	TESSindex *vertexIndices;
